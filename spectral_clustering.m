@@ -1,8 +1,28 @@
 function [seeds,S] = spectral_clustering(X,k)
 % Spectral clustering algorithm by Ng, Jordan and Weiss(2002)
 
-%[opt_width] = opt_similarity(X,k);
-% Similarity matrix from data X by Gaussian kernel
+% Modified from the code written by Ingo Buerk:
+%   Executes the spectral clustering algorithm defined by
+%   Type on the adjacency matrix W and returns the k cluster
+%   indicator vectors as columns in C.
+%
+%   'W' - Adjacency matrix, needs to be square
+%   'k' - Number of clusters to look for
+%
+%   References:
+%   - Ulrike von Luxburg, "A Tutorial on Spectral Clustering", 
+%     Statistics and Computing 17 (4), 2007
+%
+%   Author: Ingo Buerk
+%   Year  : 2011/2012
+%   Bachelor Thesis
+
+% © 09/06/2015 Viivi Uurtio, Aalto University
+% viivi.uurtio@aalto.fi
+%
+% This code is for academic purposes only.
+% Commercial use is not allowed.
+
 A = gram( X', X', 'gaussian',1); % Gaussian kernel
 A(logical(eye(size(A)))) = 0; % diagonal elements = 0
 
